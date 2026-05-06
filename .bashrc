@@ -4,23 +4,34 @@ case $- in
 *) return ;;
 esac
 
-dotfiles_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+dotfiles_source="${BASH_SOURCE[0]}"
+if command -v readlink >/dev/null 2>&1; then
+  resolved_source="$(readlink -f -- "$dotfiles_source" 2>/dev/null)" || resolved_source=""
+  if [ -n "$resolved_source" ]; then
+    dotfiles_source="$resolved_source"
+  fi
+fi
+dotfiles_dir="$(cd -- "$(dirname -- "$dotfiles_source")" && pwd)"
 hostname_short="$(hostname -s 2>/dev/null || hostname)"
 
 path_prepend_if_dir() {
   [ -d "$1" ] || return 0
   case ":$PATH:" in
-    *":$1:"*) ;;
-    *) PATH="$1:$PATH" ;;
+  *":$1:"*) ;;
+  *) PATH="$1:$PATH" ;;
   esac
 }
 
 path_append_if_dir() {
   [ -d "$1" ] || return 0
   case ":$PATH:" in
-    *":$1:"*) ;;
-    *) PATH="$PATH:$1" ;;
+  *":$1:"*) ;;
+  *) PATH="$PATH:$1" ;;
   esac
+}
+
+nvk() {
+  NVIM_APPNAME=nvim-kickstart nvim "$@"
 }
 
 export OSH="$HOME/.oh-my-bash"
@@ -61,7 +72,7 @@ fi
 
 path_prepend_if_dir "/usr/local/go/bin"
 path_prepend_if_dir "$HOME/.local/bin"
-path_append_if_dir "/opt/nvim-linux-x86_64/bin"
+#path_append_if_dir "/opt/nvim-linux-x86_64/bin"
 export PATH
 
 export NVM_DIR="$HOME/.nvm"
