@@ -6,6 +6,7 @@ This repo is set up for sharing shell config across multiple Ubuntu machines whi
 
 - `.bashrc`: shared interactive shell setup
 - `.bash_aliases`: shared aliases that make sense everywhere
+- `.config/nvim`: shared Neovim config copied from `~/.config/nvim-kickstart`
 - `hosts/<hostname>.bash`: per-machine exports, paths, and aliases
 - `install.sh`: symlinks the tracked files into `$HOME` and backs up existing files
 
@@ -32,6 +33,22 @@ cp hosts/example-host.bash hosts/$(hostname -s).bash
 
 4. Fill in the machine-specific paths and aliases.
 5. Run `./install.sh`.
+
+## Neovim
+
+The repo also manages Neovim through `.config/nvim`, which gets linked to `~/.config/nvim`.
+
+This Neovim config is copied from your `~/.config/nvim-kickstart` setup and gets linked to `~/.config/nvim`.
+
+- `init.lua`: main Neovim entrypoint
+- `lua/custom/*`: your custom Kickstart modules
+- `lua/kickstart/*`: bundled Kickstart support modules
+
+Current customizations:
+
+- whatever is currently in your `nvim-kickstart` config, preserved in the repo
+
+Add Neovim customizations one step at a time under `lua/custom/` after confirming the shared setup works cleanly from the repo.
 
 ## Notes
 
