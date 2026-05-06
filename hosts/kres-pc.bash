@@ -12,7 +12,7 @@ path_prepend_if_dir "/bigdata/Jessin/Softwares/containers"
 export PATH
 
 if command -v keychain >/dev/null 2>&1; then
-  eval "$(keychain --quiet --eval id_ed25519 id_ed25519_github 2>/dev/null)"
+  eval "$(keychain --quiet --eval id_ed25519_kres-pc id_ed25519_kres-pc_github 2>/dev/null)"
 fi
 
 alias ca="source /bigdata/Jessin/Softwares/anaconda3/bin/activate"
