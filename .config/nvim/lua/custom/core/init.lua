@@ -1,0 +1,5 @@
+require 'custom.core.options'
+require 'custom.core.clipboard'
+require 'custom.core.filetypes'
+require 'custom.core.keymaps'
+require 'custom.core.autocmds'

@@ -1,0 +1,11 @@
+tags
+test.sh
+.luarc.json
+nvim
+
+spell/
+
+# In your personal fork, it is recommended to track `lazy-lock.json` in version control
+# so plugin versions stay reproducible across machines.
+
+.DS_Store
