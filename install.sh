@@ -27,6 +27,9 @@ link_file() {
 link_file "$repo_dir/.bashrc" "$HOME/.bashrc"
 link_file "$repo_dir/.bash_aliases" "$HOME/.bash_aliases"
 
+mkdir -p "$HOME/.config"
+link_file "$repo_dir/.config/nvim" "$HOME/.config/nvim"
+
 printf '\n'
 printf 'Host config expected at: %s/hosts/%s.bash\n' "$repo_dir" "$(hostname -s 2>/dev/null || hostname)"
 printf 'Reload with: source ~/.bashrc\n'
