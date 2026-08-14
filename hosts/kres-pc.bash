@@ -15,10 +15,4 @@ if command -v keychain >/dev/null 2>&1; then
   eval "$(keychain --quiet --eval id_ed25519_kres-pc id_ed25519_kres-pc_github 2>/dev/null)"
 fi
 
-alias ca="source /bigdata/Jessin/Softwares/miniforge3/bin/activate"
-alias search_fastq="python3 /home/andreas/Documents/fastq_search/backend/copy_fastq.py"
-alias seqp="cd /bigdata/Jessin/Sequencing_projects/andreas"
-alias soft="cd /bigdata/Jessin/Softwares"
-alias scripts="cd /bigdata/Jessin/Scripts"
-alias ass="cd /bigdata/Jessin/Softwares/nextflow_pipeline/assembly_amr"
 alias btfix="systemctl --user restart wireplumber"
