@@ -610,8 +610,6 @@ require('lazy').setup({
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
 
-        stylua = {}, -- Used to format Lua code
-
         -- Special Lua Config, as recommended by neovim help docs
         lua_ls = {
           on_init = function(client)
@@ -652,10 +650,19 @@ require('lazy').setup({
       --    :Mason
       --
       -- You can press `g?` for help in this menu.
-      local ensure_installed = vim.tbl_keys(servers or {})
+      -- `mason-tool-installer` expects Mason package names, whereas `servers`
+      -- uses nvim-lspconfig names (for example, `nextflow_ls`). Convert the
+      -- latter before asking Mason to install them.
+      local lspconfig_to_mason = require('mason-lspconfig').get_mappings().lspconfig_to_mason
+      local ensure_installed = {}
+      for server_name in pairs(servers or {}) do
+        local package_name = lspconfig_to_mason[server_name]
+        if package_name then table.insert(ensure_installed, package_name) end
+      end
       if has_custom_lsp and custom_lsp.ensure_installed then vim.list_extend(ensure_installed, custom_lsp.ensure_installed) end
       vim.list_extend(ensure_installed, {
         -- You can add other tools here that you want Mason to install
+        'stylua',
       })
 
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
